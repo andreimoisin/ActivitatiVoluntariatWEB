@@ -21,6 +21,7 @@
             <div class="form-group">
                 <label asp-for="Activitate.ResponsabilID" class="control-label"></label>
                 <select asp-for="Activitate.ResponsabilID" class ="form-control" asp-items="ViewBag.ResponsabilID"></select>
+                <span asp-validation-for="Activitate.ResponsabilID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Activitate.Data" class="control-label"></label>

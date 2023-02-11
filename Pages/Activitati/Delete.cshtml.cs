@@ -29,7 +29,7 @@ namespace ActivitatiVoluntariatWEB.Pages.Activitati
                 return NotFound();
             }
 
-            var activitate = await _context.Activitate.FirstOrDefaultAsync(m => m.ID == id);
+            var activitate = await _context.Activitate.Include(a => a.Responsabil).FirstOrDefaultAsync(m => m.ID == id);
 
             if (activitate == null)
             {
