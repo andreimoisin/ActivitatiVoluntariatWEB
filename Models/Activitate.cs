@@ -8,6 +8,6 @@
         public Responsabil? Responsabil { get; set; }
         public DateTime Data { get; set; }
         public int Punctaj { get; set; }
-        public string Departament { get; set; }
+        public Departament? Departament { get; set; }
     }
 }
