@@ -48,14 +48,21 @@ namespace ActivitatiVoluntariatWEB.Pages.Departamente
             {
                 return NotFound();
             }
-            var departament = await _context.Departament.FindAsync(id);
 
-            if (departament != null)
+            // verifica daca exista activitati asociate departamentului
+            var activitati = await _context.Activitate.Where(a => a.DepartamentID == Departament.ID).ToListAsync();
+
+            if (activitati.Any())
             {
-                Departament = departament;
-                _context.Departament.Remove(Departament);
-                await _context.SaveChangesAsync();
+                // actualizeaza toate activitatile asociate departamentului (dep = null)
+                activitati.ForEach(a => a.Departament = null);
+                _context.Activitate.UpdateRange(activitati);
+
             }
+
+            // sterge departamentul
+            _context.Departament.Remove(Departament);
+            await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }

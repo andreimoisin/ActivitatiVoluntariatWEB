@@ -48,14 +48,21 @@ namespace ActivitatiVoluntariatWEB.Pages.Responsabili
             {
                 return NotFound();
             }
-            var responsabil = await _context.Responsabil.FindAsync(id);
 
-            if (responsabil != null)
+            // verifica daca exista activitati asociate departamentului
+            var activitati = await _context.Activitate.Where(a => a.ResponsabilID == Responsabil.ID).ToListAsync();
+
+            if (activitati.Any())
             {
-                Responsabil = responsabil;
-                _context.Responsabil.Remove(Responsabil);
-                await _context.SaveChangesAsync();
+                // actualizeaza toate activitatile asociate responsabilului (responsabil = null)
+                activitati.ForEach(a => a.Responsabil = null);
+                _context.Activitate.UpdateRange(activitati);
+
             }
+
+            // sterge responsabilul
+            _context.Responsabil.Remove(Responsabil);
+            await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }
