@@ -26,7 +26,9 @@ namespace ActivitatiVoluntariatWEB.Pages.Activitati
             if (_context.Activitate != null)
             {
                 Activitate = await _context.Activitate
-                .Include(a => a.Responsabil).ToListAsync();
+                .Include(a => a.Departament)
+                .Include(a => a.Responsabil)
+                .ToListAsync();
             }
         }
     }

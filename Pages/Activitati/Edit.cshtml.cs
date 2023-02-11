@@ -37,6 +37,7 @@ namespace ActivitatiVoluntariatWEB.Pages.Activitati
             }
             Activitate = activitate;
             ViewData["ResponsabilID"] = new SelectList(_context.Set<Responsabil>(), "ID", "NumeResponsabil");
+            ViewData["DepartamentID"] = new SelectList(_context.Set<Departament>(), "ID", "NumeDepartament");
             return Page();
         }
 

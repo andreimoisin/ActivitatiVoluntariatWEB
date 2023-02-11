@@ -19,7 +19,7 @@
                 <span asp-validation-for="Activitate.NumeActivitate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Activitate.ResponsabilID" class="control-label"></label>
+                <label asp-for="Activitate.ResponsabilID" class="control-label">Nume Responsabil</label>
                 <select asp-for="Activitate.ResponsabilID" class ="form-control" asp-items="ViewBag.ResponsabilID"></select>
                 <span asp-validation-for="Activitate.ResponsabilID" class="text-danger"></span>
             </div>
@@ -34,9 +34,9 @@
                 <span asp-validation-for="Activitate.Punctaj" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Activitate.Departament" class="control-label"></label>
-                <input asp-for="Activitate.Departament" class="form-control" />
-                <span asp-validation-for="Activitate.Departament" class="text-danger"></span>
+                <label asp-for="Activitate.DepartamentID" class="control-label">Departament</label>
+                <select asp-for="Activitate.DepartamentID" class="form-control" asp-items="ViewBag.DepartamentID"></select>
+                <span asp-validation-for="Activitate.DepartamentID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

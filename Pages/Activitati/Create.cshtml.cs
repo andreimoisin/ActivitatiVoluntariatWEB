@@ -21,7 +21,8 @@ namespace ActivitatiVoluntariatWEB.Pages.Activitati
 
         public IActionResult OnGet()
         {
-        ViewData["ResponsabilID"] = new SelectList(_context.Set<Responsabil>(), "ID", "NumeResponsabil");
+            ViewData["ResponsabilID"] = new SelectList(_context.Set<Responsabil>(), "ID", "NumeResponsabil");
+            ViewData["DepartamentID"] = new SelectList(_context.Set<Departament>(), "ID", "NumeDepartament");
             return Page();
         }
 
