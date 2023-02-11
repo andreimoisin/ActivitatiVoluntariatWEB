@@ -26,7 +26,16 @@ namespace ActivitatiVoluntariatWEB.Pages.Activitati
 
         public IList<Activitate> Activitate { get;set; } = default!;
 
-        public async Task OnGetAsync(string sortOrder)
+        public async Task<IActionResult> OnGetSortByDateAsync()
+        {
+            var activitati = _context.Activitate.Include(a => a.Departament).Include(a => a.Responsabil).AsQueryable();
+
+            activitati = activitati.OrderBy(a => a.Data);
+            return Page();
+        }
+
+
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
             NumeSortOrder = sortOrder == "nume_asc" ? "nume_desc" : "nume_asc";
             DataSortOrder = sortOrder == "data_asc" ? "data_desc" : "data_asc";
@@ -65,6 +74,13 @@ namespace ActivitatiVoluntariatWEB.Pages.Activitati
                 default:
                     activitati = activitati.OrderBy(a => a.NumeActivitate);
                     break;
+            }
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                activitati = activitati.Where(a => a.NumeActivitate.Contains(searchString) ||
+                                                   a.Departament.NumeDepartament.Contains(searchString) ||
+                                                   a.Responsabil.NumeResponsabil.Contains(searchString));
             }
 
             Activitate = await activitati
