@@ -36,7 +36,7 @@ namespace ActivitatiVoluntariatWEB.Pages.Activitati
                 return NotFound();
             }
             Activitate = activitate;
-           ViewData["ResponsabilID"] = new SelectList(_context.Set<Responsabil>(), "ID", "ID");
+            ViewData["ResponsabilID"] = new SelectList(_context.Set<Responsabil>(), "ID", "NumeResponsabil");
             return Page();
         }
 
