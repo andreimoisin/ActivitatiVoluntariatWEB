@@ -19,17 +19,58 @@ namespace ActivitatiVoluntariatWEB.Pages.Activitati
             _context = context;
         }
 
+        public string NumeSortOrder { get; set; }
+        public string DataSortOrder { get; set; }
+        public string DepartamentSortOrder { get; set; }
+        public string PunctajSortOrder { get; set; }
+
         public IList<Activitate> Activitate { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sortOrder)
         {
-            if (_context.Activitate != null)
+            NumeSortOrder = sortOrder == "nume_asc" ? "nume_desc" : "nume_asc";
+            DataSortOrder = sortOrder == "data_asc" ? "data_desc" : "data_asc";
+            DepartamentSortOrder = sortOrder == "dep_asc" ? "dep_desc" : "dep_asc";
+            PunctajSortOrder = sortOrder == "pct_asc" ? "pct_desc" : "pct_asc";
+
+
+            var activitati = _context.Activitate.Include(a => a.Departament).Include(a => a.Responsabil).AsQueryable();
+
+            switch (sortOrder)
             {
-                Activitate = await _context.Activitate
-                .Include(a => a.Departament)
-                .Include(a => a.Responsabil)
-                .ToListAsync();
+                case "nume_desc":
+                    activitati = activitati.OrderByDescending(a => a.NumeActivitate);
+                    break;
+                case "nume_asc":
+                    activitati = activitati.OrderBy(a => a.NumeActivitate);
+                    break;
+                case "data_desc":
+                    activitati = activitati.OrderByDescending(a => a.Data);
+                    break;
+                case "data_asc":
+                    activitati = activitati.OrderBy(a => a.Data);
+                    break;
+                case "dep_desc":
+                    activitati = activitati.OrderByDescending(a => a.Departament.NumeDepartament);
+                    break;
+                case "dep_asc":
+                    activitati = activitati.OrderBy(a => a.Departament.NumeDepartament);
+                    break;
+                case "pct_desc":
+                    activitati = activitati.OrderByDescending(a => a.Punctaj);
+                    break;
+                case "pct_asc":
+                    activitati = activitati.OrderBy(a => a.Punctaj);
+                    break;
+                default:
+                    activitati = activitati.OrderBy(a => a.NumeActivitate);
+                    break;
             }
+
+            Activitate = await activitati
+            .Include(a => a.Departament)
+            .Include(a => a.Responsabil)
+            .ToListAsync();
         }
     }
 }

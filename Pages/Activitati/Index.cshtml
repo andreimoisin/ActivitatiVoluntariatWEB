@@ -5,6 +5,12 @@
     ViewData["Title"] = "Activitati";
 }
 
+
+
+
+
+
+
 <h1>Activitati</h1>
 
 <p>
@@ -14,19 +20,27 @@
     <thead>
         <tr>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NumeSortOrder">
                 @Html.DisplayNameFor(model => model.Activitate[0].NumeActivitate)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Activitate[0].Responsabil.NumeResponsabil)
             </th>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DataSortOrder">
                 @Html.DisplayNameFor(model => model.Activitate[0].Data)
+                </a>
             </th>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.PunctajSortOrder">
                 @Html.DisplayNameFor(model => model.Activitate[0].Punctaj)
+                </a>
             </th>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DepartamentSortOrder">
                 @Html.DisplayNameFor(model => model.Activitate[0].Departament.NumeDepartament)
+                </a>
             </th>
             <th></th>
         </tr>
