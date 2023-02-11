@@ -1,0 +1,84 @@
+﻿@page "{id:int?}"
+@model ActivitatiVoluntariatWEB.Pages.Departamente.IndexModel
+
+@{
+    ViewData["Title"] = "Departamente";
+}
+
+<h1>Departamente</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Departament[0].NumeDepartament)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departament[0].Coordonator)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departament[0].NumarVoluntari)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.DepartamentData.Departamente) {
+            string selectedRow = ""; 
+            if (item.ID == Model.DepartamentID) 
+            {
+                selectedRow = "table-success"; 
+            }
+            <tr class="@selectedRow">
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeDepartament)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Coordonator)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumarVoluntari)
+            </td>
+            <td>
+                <a asp-page="./Index" asp-route-id="@item.ID">Select</a> |
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@if (Model.DepartamentData.Activitati != null)
+{
+    <h5>Activitati din cadrul departamentului @Model.DepartamentData.Departamente.FirstOrDefault(d => d.ID == Model.DepartamentID)?.NumeDepartament</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nume activitate</th>
+                <th>Punctaj</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DepartamentData.Departamente)
+            {
+                string selectedRow = "";
+                if (item.ID == Model.DepartamentID)
+                {
+                    selectedRow = "table-success";
+                    foreach (var activitate in item.Activitati)
+                    {
+                        <tr class="@selectedRow">
+                            <td>@activitate.NumeActivitate</td>
+                            <td>@activitate.Punctaj</td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+}
+

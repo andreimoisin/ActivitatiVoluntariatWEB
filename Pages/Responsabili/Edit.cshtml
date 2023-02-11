@@ -1,0 +1,45 @@
+﻿@page
+@model ActivitatiVoluntariatWEB.Pages.Responsabili.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Responsabil</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Responsabil.ID" />
+            <div class="form-group">
+                <label asp-for="Responsabil.NumeResponsabil" class="control-label"></label>
+                <input asp-for="Responsabil.NumeResponsabil" class="form-control" />
+                <span asp-validation-for="Responsabil.NumeResponsabil" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Responsabil.Functie" class="control-label"></label>
+                <input asp-for="Responsabil.Functie" class="form-control" />
+                <span asp-validation-for="Responsabil.Functie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Responsabil.Bio" class="control-label"></label>
+                <input asp-for="Responsabil.Bio" class="form-control" />
+                <span asp-validation-for="Responsabil.Bio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

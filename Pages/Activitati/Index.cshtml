@@ -1,0 +1,75 @@
+﻿@page
+@model ActivitatiVoluntariatWEB.Pages.Activitati.IndexModel
+
+@{
+    ViewData["Title"] = "Activitati";
+}
+
+
+
+<h1>Activitati</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<form method="get">
+    <input type="text" name="searchString" placeholder="Caută...">
+    <button type="submit">Caută</button>
+    <button type="submit" asp-page-handler="SortByDateAsync">Reset</button>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NumeSortOrder">
+                @Html.DisplayNameFor(model => model.Activitate[0].NumeActivitate)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activitate[0].Responsabil.NumeResponsabil)
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DataSortOrder">
+                @Html.DisplayNameFor(model => model.Activitate[0].Data)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.PunctajSortOrder">
+                @Html.DisplayNameFor(model => model.Activitate[0].Punctaj)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DepartamentSortOrder">
+                @Html.DisplayNameFor(model => model.Activitate[0].Departament.NumeDepartament)
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Activitate) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeActivitate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Responsabil.NumeResponsabil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Punctaj)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departament.NumeDepartament)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
