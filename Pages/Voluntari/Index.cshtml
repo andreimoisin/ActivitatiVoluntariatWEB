@@ -10,14 +10,18 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<form method="get">
+    <input type="text" name="searchString" placeholder="Caută...">
+    <button type="submit">Caută</button>
+    <button type="submit" asp-page-handler="SortByNameAsync">Reset</button>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Voluntar[0].Nume)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Voluntar[0].Prenume)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NumeSortOrder">
+                    @Html.DisplayNameFor(model => model.Voluntar[0].NumeComplet)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Voluntar[0].Email)
@@ -26,7 +30,9 @@
                 @Html.DisplayNameFor(model => model.Voluntar[0].Telefon)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Voluntar[0].Departament)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DepartamentSortOrder">
+                    @Html.DisplayNameFor(model => model.Voluntar[0].Departament)
+                </a>
             </th>
             <th></th>
         </tr>
@@ -35,10 +41,7 @@
 @foreach (var item in Model.Voluntar) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nume)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prenume)
+                @Html.DisplayFor(modelItem => item.NumeComplet)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
