@@ -4,6 +4,7 @@ using ActivitatiVoluntariatWEB.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ActivitatiVoluntariatWEB.Migrations
 {
     [DbContext(typeof(ActivitatiVoluntariatWEBContext))]
-    partial class ActivitatiVoluntariatWEBContextModelSnapshot : ModelSnapshot
+    [Migration("20230212133657_VoluntariCreate")]
+    partial class VoluntariCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -52,12 +52,23 @@ namespace ActivitatiVoluntariatWEB.Pages.Departamente
             // verifica daca exista activitati asociate departamentului
             var activitati = await _context.Activitate.Where(a => a.DepartamentID == Departament.ID).ToListAsync();
 
+
+            // verifica daca exista voluntari asociati departamentului
+            var voluntari = await _context.Voluntar.Where(a => a.DepartamentID == Departament.ID).ToListAsync();
+
             if (activitati.Any())
             {
                 // actualizeaza toate activitatile asociate departamentului (dep = null)
                 activitati.ForEach(a => a.Departament = null);
                 _context.Activitate.UpdateRange(activitati);
 
+            }
+
+            if (voluntari.Any())
+            {
+                // actualizeaza toti voluntarii asociati departamentului (dep = null)
+                voluntari.ForEach(a => a.Departament = null);
+                _context.Voluntar.UpdateRange(voluntari);
             }
 
             // sterge departamentul
