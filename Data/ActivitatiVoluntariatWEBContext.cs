@@ -19,5 +19,9 @@ namespace ActivitatiVoluntariatWEB.Data
         public DbSet<ActivitatiVoluntariatWEB.Models.Responsabil> Responsabil { get; set; }
 
         public DbSet<ActivitatiVoluntariatWEB.Models.Departament> Departament { get; set; }
+
+        public DbSet<ActivitatiVoluntariatWEB.Models.Voluntar> Voluntar { get; set; }
+
+        public DbSet<ActivitatiVoluntariatWEB.Models.Inscriere> Inscriere { get; set; }
     }
 }
