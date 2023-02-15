@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ActivitatiVoluntariatWEB.Migrations
 {
     [DbContext(typeof(ActivitatiVoluntariatWEBContext))]
-    [Migration("20230211105138_ActivitatiUpdate")]
-    partial class ActivitatiUpdate
+    [Migration("20230215225225_newinit")]
+    partial class newinit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -81,6 +81,29 @@ namespace ActivitatiVoluntariatWEB.Migrations
                     b.ToTable("Departament");
                 });
 
+            modelBuilder.Entity("ActivitatiVoluntariatWEB.Models.Inscriere", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int?>("ActivitateID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("VoluntarID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ActivitateID");
+
+                    b.HasIndex("VoluntarID");
+
+                    b.ToTable("Inscriere");
+                });
+
             modelBuilder.Entity("ActivitatiVoluntariatWEB.Models.Responsabil", b =>
                 {
                     b.Property<int>("ID")
@@ -106,6 +129,40 @@ namespace ActivitatiVoluntariatWEB.Migrations
                     b.ToTable("Responsabil");
                 });
 
+            modelBuilder.Entity("ActivitatiVoluntariatWEB.Models.Voluntar", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int?>("DepartamentID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nume")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Prenume")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("DepartamentID");
+
+                    b.ToTable("Voluntar");
+                });
+
             modelBuilder.Entity("ActivitatiVoluntariatWEB.Models.Activitate", b =>
                 {
                     b.HasOne("ActivitatiVoluntariatWEB.Models.Departament", "Departament")
@@ -121,6 +178,30 @@ namespace ActivitatiVoluntariatWEB.Migrations
                     b.Navigation("Responsabil");
                 });
 
+            modelBuilder.Entity("ActivitatiVoluntariatWEB.Models.Inscriere", b =>
+                {
+                    b.HasOne("ActivitatiVoluntariatWEB.Models.Activitate", "Activitate")
+                        .WithMany()
+                        .HasForeignKey("ActivitateID");
+
+                    b.HasOne("ActivitatiVoluntariatWEB.Models.Voluntar", "Voluntar")
+                        .WithMany("Inscrieri")
+                        .HasForeignKey("VoluntarID");
+
+                    b.Navigation("Activitate");
+
+                    b.Navigation("Voluntar");
+                });
+
+            modelBuilder.Entity("ActivitatiVoluntariatWEB.Models.Voluntar", b =>
+                {
+                    b.HasOne("ActivitatiVoluntariatWEB.Models.Departament", "Departament")
+                        .WithMany()
+                        .HasForeignKey("DepartamentID");
+
+                    b.Navigation("Departament");
+                });
+
             modelBuilder.Entity("ActivitatiVoluntariatWEB.Models.Departament", b =>
                 {
                     b.Navigation("Activitati");
@@ -129,6 +210,11 @@ namespace ActivitatiVoluntariatWEB.Migrations
             modelBuilder.Entity("ActivitatiVoluntariatWEB.Models.Responsabil", b =>
                 {
                     b.Navigation("Activitati");
+                });
+
+            modelBuilder.Entity("ActivitatiVoluntariatWEB.Models.Voluntar", b =>
+                {
+                    b.Navigation("Inscrieri");
                 });
 #pragma warning restore 612, 618
         }
