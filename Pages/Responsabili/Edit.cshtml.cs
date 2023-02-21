@@ -8,9 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ActivitatiVoluntariatWEB.Data;
 using ActivitatiVoluntariatWEB.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace ActivitatiVoluntariatWEB.Pages.Responsabili
 {
+    [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
         private readonly ActivitatiVoluntariatWEB.Data.ActivitatiVoluntariatWEBContext _context;
