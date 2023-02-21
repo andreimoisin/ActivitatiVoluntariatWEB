@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ActivitatiVoluntariatWEB.Data;
 using ActivitatiVoluntariatWEB.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace ActivitatiVoluntariatWEB.Pages.Responsabili
 {
+    [Authorize(Roles = "Admin")]
     public class DeleteModel : PageModel
     {
         private readonly ActivitatiVoluntariatWEB.Data.ActivitatiVoluntariatWEBContext _context;

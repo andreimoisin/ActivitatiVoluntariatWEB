@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ActivitatiVoluntariatWEB.Data;
 using ActivitatiVoluntariatWEB.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace ActivitatiVoluntariatWEB.Pages.Responsabili
 {
+    [Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
         private readonly ActivitatiVoluntariatWEB.Data.ActivitatiVoluntariatWEBContext _context;
